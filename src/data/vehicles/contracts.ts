@@ -29,6 +29,15 @@ export interface Vehicle {
     price: number;
 }
 
+export interface PropsTable {
+    vehicles: Vehicle[];
+}
+
+export interface PropsTableItem {
+    vehicle: Vehicle;
+    number: number;
+}
+
 export interface VehicleFilter {
     title: string;
     type: VehicleType | null;
