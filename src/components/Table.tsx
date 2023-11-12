@@ -1,6 +1,6 @@
 import React from "react";
 import { CurrencyLabel } from "@skbkontur/react-ui";
-import { PropsTable, PropsTableItem } from "../data/vehicles/contracts"
+import { PropsTable, PropsTableItem, vehicleTypeTitles } from "../data/vehicles/contracts"
 
 
 const TableItem: React.FC<PropsTableItem> = ({ vehicle, number }) => {
@@ -10,6 +10,9 @@ const TableItem: React.FC<PropsTableItem> = ({ vehicle, number }) => {
             <td>{vehicle.title}</td>
             <td>
                 <CurrencyLabel value={vehicle.price} fractionDigits={2} />
+            </td>
+            <td>
+                <p className="vehicleTypeTitle">{vehicleTypeTitles[vehicle.type]}</p>
             </td>
         </tr>
     );
@@ -23,6 +26,7 @@ export const Table: React.FC<PropsTable> = ({ vehicles }) => {
                 <th>#</th>
                 <th>Название</th>
                 <th>Цена, ₽</th>
+                <th>Тип ТС</th>
             </tr>
             </thead>
             <tbody>
