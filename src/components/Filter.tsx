@@ -28,7 +28,7 @@ export class Filter extends React.Component<FilterProps> {
         return (
             <div>
                 <h3>Фильтр</h3>
-                <div style={{ display: "grid", maxWidth: "60%", margin: "7px" }}>
+                <div style={{ display: "grid", maxWidth: "30%", margin: "7px" }}>
                     <label htmlFor="vehicleName">Поиск по названию ТС</label>
                     <input type="text"
                         name="vehicleName"
@@ -37,7 +37,7 @@ export class Filter extends React.Component<FilterProps> {
                         onChange={this.handleSubstringChange}
                     />
                 </div>
-                <div style={{ display: "grid", maxWidth: "60%", margin: "7px" }}>
+                <div style={{ display: "grid", maxWidth: "30%", margin: "7px" }}>
                     <label htmlFor="">Поиск по Типу ТС</label>
                     <VehicleTypeSelect value={this.state.type || -1 as VehicleType} onChange={this.handleTypeChange} />
                 </div>
