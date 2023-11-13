@@ -1,7 +1,6 @@
 import React from "react";
 import { VehicleFilter, VehicleType } from "../data/vehicles/contracts";
 import { VehicleTypeSelect } from "./VehicleTypeSelect";
-import { VehicleApi } from "../data/vehicles/api";
 
 
 interface FilterProps {
@@ -12,12 +11,17 @@ interface FilterProps {
 export class Filter extends React.Component<FilterProps> {
     state = {
         title: "",
-        type: null
+        type: null,
     }
 
+    localRender = () => this.props.rerenderTable(this.state);
+
     handleSubstringChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value);
-        this.setState({title: e.target.value }, () => this.props.rerenderTable(this.state));
+        this.setState({ title: e.target.value }, this.localRender);
+    }
+
+    handleTypeChange = (newType: number | null) => {
+        this.setState({ type: newType }, this.localRender);
     }
 
     render(): React.ReactNode {
@@ -26,18 +30,16 @@ export class Filter extends React.Component<FilterProps> {
                 <h3>Фильтр</h3>
                 <div style={{ display: "grid", maxWidth: "60%", margin: "7px" }}>
                     <label htmlFor="vehicleName">Поиск по названию ТС</label>
-                    <div style={{ display: "flex" }}>
-                        <input type="text"
-                            name="vehicleName"
-                            id="vehicleName"
-                            placeholder="Введите название ТС..."
-                            onChange={this.handleSubstringChange}
-                        />
-                    </div>
+                    <input type="text"
+                        name="vehicleName"
+                        id="vehicleName"
+                        placeholder="Введите название ТС..."
+                        onChange={this.handleSubstringChange}
+                    />
                 </div>
                 <div style={{ display: "grid", maxWidth: "60%", margin: "7px" }}>
                     <label htmlFor="">Поиск по Типу ТС</label>
-                    {/* <VehicleTypeSelect value={selectedVehicleType} onChange={this.handleVehicleTypeChange} /> */}
+                    <VehicleTypeSelect value={this.state.type || -1 as VehicleType} onChange={this.handleTypeChange} />
                 </div>
             </div>
         );

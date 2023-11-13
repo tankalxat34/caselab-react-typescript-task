@@ -22,17 +22,17 @@ export const Table: React.FC<PropsTable> = ({ vehicles }) => {
     return (
         <table>
             <thead>
-            <tr>
-                <th>#</th>
-                <th>Название</th>
-                <th>Цена, ₽</th>
-                <th>Тип ТС</th>
-            </tr>
+                <tr>
+                    <th>#</th>
+                    <th>Название</th>
+                    <th>Цена, ₽</th>
+                    <th>Тип ТС</th>
+                </tr>
             </thead>
             <tbody>
-            {vehicles.map((x, i) => (
-                <TableItem key={x.id} number={i + 1} vehicle={x} />
-            ))}
+                {vehicles.map((x, i) => (
+                    <TableItem key={x.id} number={i + 1} vehicle={x} />
+                ))}
             </tbody>
         </table>
     );
