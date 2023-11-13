@@ -12,6 +12,10 @@ const initialFilter: VehicleFilter = {
 export default function App() {
     const [vehicles, setVehicles] = useState<Vehicle[]>([]);
 
+    const rerenderTable = (filter: VehicleFilter) => {
+        if (!/[^a-zA-Z]+/gm.test(filter.title)) setVehicles(VehicleApi.search(filter));
+    }
+
     useEffect(() => {
         const data = VehicleApi.search(initialFilter);
         setVehicles(data);
@@ -19,7 +23,7 @@ export default function App() {
 
     return (
         <>
-            <Filter />
+            <Filter rerenderTable={rerenderTable}/>
             <Table vehicles={vehicles} />
         </>
     );

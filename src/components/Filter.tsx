@@ -1,32 +1,43 @@
 import React from "react";
-import { Vehicle, VehicleType } from "../data/vehicles/contracts";
+import { VehicleFilter, VehicleType } from "../data/vehicles/contracts";
 import { VehicleTypeSelect } from "./VehicleTypeSelect";
+import { VehicleApi } from "../data/vehicles/api";
 
-export class Filter extends React.Component {
+
+interface FilterProps {
+    rerenderTable: (filter: VehicleFilter) => void
+}
+
+
+export class Filter extends React.Component<FilterProps> {
     state = {
-        selectedVehicleType: -1 as VehicleType, // Изначально выбрано "Все"
-    };
+        title: "",
+        type: null
+    }
 
-    handleVehicleTypeChange = (value: VehicleType | null) => {
-        this.setState({ selectedVehicleType: value != null ? value : -1 });
-    };
+    handleSubstringChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value);
+        this.setState({title: e.target.value }, () => this.props.rerenderTable(this.state));
+    }
 
     render(): React.ReactNode {
-        const { selectedVehicleType } = this.state;
-
         return (
             <div>
                 <h3>Фильтр</h3>
                 <div style={{ display: "grid", maxWidth: "60%", margin: "7px" }}>
                     <label htmlFor="vehicleName">Поиск по названию ТС</label>
                     <div style={{ display: "flex" }}>
-                        <input type="text" name="vehicleName" id="vehicleName" placeholder="Введите название ТС..." />
-                        <button>Найти</button>
+                        <input type="text"
+                            name="vehicleName"
+                            id="vehicleName"
+                            placeholder="Введите название ТС..."
+                            onChange={this.handleSubstringChange}
+                        />
                     </div>
                 </div>
                 <div style={{ display: "grid", maxWidth: "60%", margin: "7px" }}>
                     <label htmlFor="">Поиск по Типу ТС</label>
-                    <VehicleTypeSelect value={selectedVehicleType} onChange={this.handleVehicleTypeChange} />
+                    {/* <VehicleTypeSelect value={selectedVehicleType} onChange={this.handleVehicleTypeChange} /> */}
                 </div>
             </div>
         );
