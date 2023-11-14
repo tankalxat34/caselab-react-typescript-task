@@ -18,13 +18,7 @@ export default function App() {
     }, []);
 
     const rerenderTable = (fltr: VehicleFilter) => {
-        if (/[^a-zA-Z]+/gm.test(fltr.title)) {
-            fltr.title = "";
-            alert("Введены некорректные символы. Повторите попытку поиска без них.");
-            return false;
-        } else {
-            setVehicles(VehicleApi.search(fltr));
-        }
+        setVehicles(VehicleApi.search(fltr));
     }
 
     return (
